@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block title %}Sign Up | CCTC AEM{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+  <div class="card p-4" style="width: 420px; text-align: center;">
+    <h3 class="mb-3 text-cyan fw-bold">Create Account</h3>
+    <p class="text-muted text-white">Join the Academic Event Management System</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mt-2">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3 text-start">
+        <label class="form-label text-light">Username</label>
+        <input type="text" name="username" class="form-control bg-dark text-light border-secondary" required>
+      </div>
+      <div class="mb-3 text-start">
+        <label class="form-label text-light">Email</label>
+        <input type="email" name="email" class="form-control bg-dark text-light border-secondary" required>
+      </div>
+      <div class="mb-3 text-start">
+        <label class="form-label text-light">Password</label>
+        <input type="password" name="password1" class="form-control bg-dark text-light border-secondary" required>
+      </div>
+      <div class="mb-3 text-start">
+        <label class="form-label text-light">Confirm Password</label>
+        <input type="password" name="password2" class="form-control bg-dark text-light border-secondary" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+    </form>
+
+    <hr class="text-secondary">
+    <p class="mt-2 text-secondary">Already have an account?</p>
+    <a href="{% url 'login' %}" class="btn btn-outline-primary w-100">Login</a>
+  </div>
+</div>
+{% endblock %}

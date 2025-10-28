@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}CCTC AEM{% endblock %}</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Dark Elegant + Glassmorphism Style -->
+  <style>
+    /* === Elegant Dark Glass Theme === */
+    body {
+      background: radial-gradient(circle at top left, #0d0d0d, #121212, #1a1a1a);
+      color: #e0e0e0;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-top: 70px; /* Space for fixed navbar */
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* Fixed Glass Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1030;
+      backdrop-filter: blur(12px);
+      background: rgba(30, 30, 30, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .navbar-brand, .nav-link {
+      color: #e0e0e0 !important;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: #00e5ff !important;
+      text-shadow: 0 0 6px #00e5ff;
+    }
+
+    main.container {
+      flex: 1;
+      padding-bottom: 100px;
+    }
+
+    /* === Glassmorphism Card === */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      color: #e0e0e0;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    }
+
+    .card-footer {
+      background: rgba(255, 255, 255, 0.08);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background-color: #00bcd4;
+      border-color: #00bcd4;
+      color: #121212;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: #0097a7;
+      border-color: #0097a7;
+      transform: scale(1.03);
+    }
+
+    .btn-outline-primary {
+      border-color: #00bcd4;
+      color: #00bcd4;
+      border-radius: 12px;
+    }
+    .btn-outline-primary:hover {
+      background-color: #00bcd4;
+      color: #121212;
+    }
+
+    /* Scrollbar Customization */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #00bcd4;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: #1a1a1a;
+    }
+
+    /* Footer with Fade-in */
+    footer {
+      background: rgba(30, 30, 30, 0.9);
+      color: #9e9e9e;
+      text-align: center;
+      padding: 1rem 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    footer.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Text Highlights */
+    .text-white { color: #ffffff8a !important; }
+    .text-cyan { color: #00e5ff !important; }
+    .text-violet { color: #b388ff !important; }
+    .text-emerald { color: #69f0ae !important; }
+    .text-gold { color: #ffeb3b !important; }
+  </style>
+</head>
+
+<body>
+  <!-- Frosted Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-cyan" href="{% url 'event_list' %}">CCTC AEM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          {% if user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'create_event' %}">Add Event</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+          {% else %}
+          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="container my-4">
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer id="mainFooter">
+    <small>&copy; 2025 CCTC Academic Event Management</small>
+  </footer>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Fade-in footer effect when scrolled near bottom
+    window.addEventListener('scroll', () => {
+      const footer = document.getElementById('mainFooter');
+      const scrollPos = window.scrollY + window.innerHeight;
+      const pageHeight = document.body.offsetHeight;
+      if (scrollPos >= pageHeight - 100) {
+        footer.classList.add('visible');
+      } else {
+        footer.classList.remove('visible');
+      }
+    });
+  </script>
+</body>
+</html>

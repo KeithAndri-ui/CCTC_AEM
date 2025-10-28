@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block title %}Get Started | CCTC AEM{% endblock %}
+{% block content %}
+
+<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100 text-center">
+  <div class="card bg-dark text-light shadow-lg border-0 p-5" style="max-width: 600px;">
+    <h1 class="display-5 fw-bold text-info mb-3">🎓 Welcome to CCTC AEM</h1>
+    <p class="lead text-secondary mb-4">
+      Manage your academic events — seminars, workshops, and conferences — all in one place.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <a href="{% url 'login' %}" class="btn btn-outline-info btn-lg px-4 py-2 shadow-sm">
+        🔐 Login
+      </a>
+      <a href="{% url 'signup' %}" class="btn btn-info btn-lg px-4 py-2 text-dark fw-semibold shadow-sm">
+        📝 Sign Up
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background: linear-gradient(135deg, #0a0a0f, #12121a);
+    color: #e0e0e0;
+  }
+
+  .card {
+    background: rgba(30, 30, 40, 0.95);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(88, 166, 255, 0.15);
+  }
+
+  a.btn-info:hover {
+    background-color: #00aaff !important;
+    color: #fff !important;
+  }
+
+  a.btn-outline-info:hover {
+    background-color: #00aaff !important;
+    border-color: #00aaff !important;
+    color: #fff !important;
+  }
+</style>
+{% endblock %}

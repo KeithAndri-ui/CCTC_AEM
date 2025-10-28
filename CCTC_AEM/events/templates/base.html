@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CCTC AEM</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-dark bg-primary mb-4">
+  <div class="container d-flex justify-content-between">
+    <a class="navbar-brand" href="{% url 'event_list' %}">CCTC Academic Event Manager</a>
+    <div>
+      {% if user.is_authenticated %}
+        <span class="text-white me-2">Hello, {{ user.username }}!</span>
+        <a href="{% url 'logout' %}" class="btn btn-light btn-sm">Logout</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="btn btn-light btn-sm">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+<div class="container">
+  {% block content %}
+  {% endblock %}
+</div>
+</body>
+</html>

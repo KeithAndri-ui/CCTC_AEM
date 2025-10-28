@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}Login | CCTC AEM{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card p-4" style="width: 400px; text-align: center;">
+    <h3 class="mb-3 text-cyan fw-bold">Welcome Back</h3>
+    <p class="text-muted text-white">Sign in to manage academic events</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mt-2">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3 text-start">
+        <label class="form-label text-light">Username</label>
+        <input type="text" name="username" class="form-control bg-dark text-light border-secondary" required>
+      </div>
+      <div class="mb-3 text-start">
+        <label class="form-label text-light">Password</label>
+        <input type="password" name="password" class="form-control bg-dark text-light border-secondary" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+
+    <hr class="text-secondary">
+    <p class="mt-2 text-secondary">Don’t have an account?</p>
+    <a href="{% url 'signup' %}" class="btn btn-outline-primary w-100">Create Account</a>
+  </div>
+</div>
+{% endblock %}

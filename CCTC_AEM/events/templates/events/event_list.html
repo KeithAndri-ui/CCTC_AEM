@@ -1,0 +1,124 @@
+{% extends 'layout.html' %}
+{% block title %}Dashboard | CCTC AEM{% endblock %}
+{% block content %}
+<div class="container py-4">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+    <div>
+      <h2 class="fw-bold mb-0 text-cyan">📅 Academic Events Dashboard</h2>
+      <p class="text-secondary mb-0">Manage, search, and filter your academic events efficiently.</p>
+    </div>
+    <a href="{% url 'create_event' %}" class="btn btn-cyan btn-lg mt-3 mt-md-0 shadow">
+      ➕ Add New Event
+    </a>
+  </div>
+
+  <!-- Search/Filter Card -->
+  <form method="get" class="glass-card p-4 mb-4">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-4">
+        <input type="text" name="q" class="form-control bg-dark text-light border-secondary"
+          placeholder="🔍 Search events..." value="{{ query }}">
+      </div>
+      <div class="col-md-3">
+        <input type="date" name="date" class="form-control bg-dark text-light border-secondary"
+          value="{{ date_filter }}">
+      </div>
+      <div class="col-md-3">
+        <select name="sort" class="form-select bg-dark text-light border-secondary">
+          <option value="">🔃 Sort by...</option>
+          <option value="date_asc" {% if sort == 'date_asc' %}selected{% endif %}>📅 Date ↑</option>
+          <option value="date_desc" {% if sort == 'date_desc' %}selected{% endif %}>📅 Date ↓</option>
+          <option value="title_asc" {% if sort == 'title_asc' %}selected{% endif %}>🔠 A → Z</option>
+          <option value="title_desc" {% if sort == 'title_desc' %}selected{% endif %}>🔡 Z → A</option>
+        </select>
+      </div>
+      <div class="col-md-2 d-flex gap-2">
+        <button type="submit" class="btn btn-success flex-fill">Filter</button>
+        <a href="{% url 'event_list' %}" class="btn btn-outline-light flex-fill">Reset</a>
+      </div>
+    </div>
+  </form>
+
+  <!-- Alerts -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show glass-alert" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Event Cards -->
+  {% if events %}
+  <div class="row">
+    {% for event in events %}
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100 glass-card text-light border-0 event-card">
+          <div class="card-body">
+            <h5 class="card-title text-cyan fw-bold mb-2">{{ event.title }}</h5>
+            <ul class="list-unstyled mb-3 small text-secondary">
+              <li><strong>📍</strong> {{ event.location }}</li>
+              <li><strong>📆</strong> {{ event.date|date:"F j, Y" }}</li>
+              <li><strong>🕒</strong> {{ event.time|time:"g:i A" }}</li>
+            </ul>
+            <p class="card-text text-light">{{ event.description|truncatewords:20 }}</p>
+          </div>
+          <div class="card-footer border-top border-secondary bg-transparent d-flex justify-content-between">
+            <a href="{% url 'update_event' event.pk %}" class="btn btn-outline-cyan btn-sm">✏️ Edit</a>
+            <a href="{% url 'delete_event' event.pk %}" class="btn btn-outline-danger btn-sm">🗑 Delete</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  {% else %}
+    <div class="glass-card text-center p-4">
+      <h5 class="text-light fw-bold">No Events Found</h5>
+      <p class="text-secondary mb-0">Try adjusting your search or filters, or click “Reset.”</p>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Dark Elegant + Glassmorphism Styling -->
+<style>
+  .glass-card {
+    background: rgb(20, 20, 20);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+  .event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.3);
+    transition: all 0.3s ease;
+  }
+  .text-cyan {
+    color: #4fc3f7 !important;
+  }
+  .btn-cyan {
+    background-color: #00bcd4;
+    color: #fff;
+    border: none;
+  }
+  .btn-cyan:hover {
+    background-color: #26c6da;
+  }
+  .btn-outline-cyan {
+    color: #4fc3f7;
+    border: 1px solid #4fc3f7;
+  }
+  .btn-outline-cyan:hover {
+    background-color: #4fc3f7;
+    color: #000;
+  }
+  .glass-alert {
+    background: rgba(88, 166, 255, 0.1);
+    border: 1px solid rgba(88, 166, 255, 0.3);
+    color: #aeefff;
+  }
+</style>
+{% endblock %}

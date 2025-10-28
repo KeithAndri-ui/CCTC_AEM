@@ -1,0 +1,72 @@
+/* === Elegant Dark Theme Colors === */
+body {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Accent Text Colors */
+.text-cyan {
+  color: #00bcd4 !important; /* Cyan Glow */
+}
+
+.text-violet {
+  color: #b388ff !important; /* Violet Mist */
+}
+
+.text-emerald {
+  color: #4caf50 !important; /* Emerald */
+}
+
+.text-gold {
+  color: #ffca28 !important; /* Gold Shine */
+}
+
+.text-soft {
+  color: #9e9e9e !important; /* Soft Gray */
+}
+
+.text-crimson {
+  color: #e53935 !important; /* Crimson */
+}
+
+/* Navbar & Card Styling */
+.navbar-dark {
+  background-color: #1f1f1f !important;
+}
+
+.card {
+  background-color: #1c1c1c;
+  border: 1px solid #2a2a2a;
+  color: #e0e0e0;
+}
+
+.card-footer {
+  background-color: #2a2a2a;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+}
+
+.btn-primary:hover {
+  background-color: #0097a7;
+  border-color: #0097a7;
+}
+
+.btn-outline-primary {
+  border-color: #00bcd4;
+  color: #00bcd4;
+}
+
+.btn-outline-primary:hover {
+  background-color: #00bcd4;
+  color: #121212;
+}
+
+/* Footer */
+footer {
+  background-color: #1f1f1f;
+  color: #9e9e9e;
+}

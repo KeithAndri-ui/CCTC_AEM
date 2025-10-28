@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+{% block title %}{{ form.instance.pk|yesno:"Edit Event,Add New Event" }} | CCTC AEM{% endblock %}
+{% block content %}
+
+<div class="container py-5">
+  <div class="glass-form card p-5 mx-auto" style="max-width: 700px;">
+    <h2 class="mb-4 text-center text-cyan fw-bold">
+      {{ form.instance.pk|yesno:"✏️ Edit Event, Add New Event" }}
+    </h2>
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% for field in form %}
+      <div class="mb-3">
+        <label class="form-label text-light fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+        <div class="text-danger small mt-1">{{ field.errors|striptags }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <div class="d-flex justify-content-between mt-4">
+        <a href="{% url 'event_list' %}" class="btn btn-outline-light px-4">⬅ Cancel</a>
+        <button type="submit" class="btn btn-cyan px-4 fw-semibold">💾 Save Event</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Custom Styling -->
+<style>
+  .glass-form {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(88, 166, 255, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-form:hover {
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.25);
+    transition: 0.3s ease;
+  }
+
+  label {
+    color: #aeefff;
+  }
+
+  input, textarea, select {
+    background-color: rgba(30, 30, 30, 0.85) !important;
+    border: 1px solid rgba(88, 166, 255, 0.3) !important;
+    color: #e0f7fa !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: #4fc3f7 !important;
+    box-shadow: 0 0 8px rgba(79, 195, 247, 0.5);
+  }
+
+  .btn-cyan {
+    background-color: #00bcd4;
+    color: #fff;
+    border: none;
+  }
+
+  .btn-cyan:hover {
+    background-color: #26c6da;
+    box-shadow: 0 0 10px rgba(0, 188, 212, 0.6);
+  }
+
+  .btn-outline-light:hover {
+    background-color: #4fc3f7;
+    color: #000 !important;
+    border-color: #4fc3f7;
+  }
+</style>
+{% endblock %}
