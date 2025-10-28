@@ -1,52 +1,131 @@
 {% extends 'layout.html' %}
+{% load static %}
 {% block title %}Get Started | CCTC AEM{% endblock %}
 {% block content %}
 
-<div class="container d-flex flex-column justify-content-center align-items-center min-vh-100 text-center">
-  <div class="card bg-dark text-light shadow-lg border-0 p-5" style="max-width: 600px;">
-    <h1 class="display-5 fw-bold text-info mb-3">🎓 Welcome to CCTC AEM</h1>
-    <p class="lead text-secondary mb-4">
-      Manage your academic events — seminars, workshops, and conferences — all in one place.
+<div class="d-flex flex-column justify-content-center align-items-center text-center" style="min-height: 80vh;">
+  <div class="card glass-card p-5 shadow-lg border-0 animate-fade-in" style="max-width: 650px;">
+    <h1 class="display-5 fw-bold text-cyan mb-3 glow-text">🎓 Welcome to CCTC AEM</h1>
+    <p class="lead text-white mb-4">
+      Organize your academic events — seminars, workshops, and conferences — all in one seamless platform.
     </p>
 
-    <div class="d-flex justify-content-center gap-3 mt-4">
-      <a href="{% url 'login' %}" class="btn btn-outline-info btn-lg px-4 py-2 shadow-sm">
+    <div class="d-flex justify-content-center gap-4 mt-4">
+      <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg px-4 py-2 shadow-glow btn-animate">
         🔐 Login
       </a>
-      <a href="{% url 'signup' %}" class="btn btn-info btn-lg px-4 py-2 text-dark fw-semibold shadow-sm">
+      <a href="{% url 'signup' %}" class="btn btn-primary btn-lg px-4 py-2 shadow-glow btn-animate">
         📝 Sign Up
       </a>
+    </div>
+
+    <div class="mt-4 small text-muted fade-in-delay text-white ">
+      <i class="bi bi-lightbulb text-white "></i> Join now and simplify your academic event management.
     </div>
   </div>
 </div>
 
 <style>
+  /* === Background Image & Layout Consistency === */
   body {
-    background: linear-gradient(135deg, #0a0a0f, #12121a);
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+      url("{% static 'images/bg.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
     color: #e0e0e0;
   }
 
-  .card {
-    background: rgba(30, 30, 40, 0.95);
+  /* === Glass Card === */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 4px 25px rgba(0, 229, 255, 0.1);
+    transition: all 0.4s ease;
   }
 
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 30px rgba(88, 166, 255, 0.15);
+  .glass-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px rgba(0, 229, 255, 0.25);
   }
 
-  a.btn-info:hover {
-    background-color: #00aaff !important;
-    color: #fff !important;
+  /* === Glow Effects === */
+  .glow-text {
+    text-shadow:
+      0 0 8px #00e5ff93,
+      0 0 16px rgba(0, 229, 255, 0.5),
+      0 0 32px rgba(0, 229, 255, 0.3);
+  }
+  .text-white { color: #ffffff8a !important; }
+
+  .shadow-glow {
+    box-shadow:
+      0 0 10px rgba(0, 229, 255, 0.3),
+      inset 0 0 10px rgba(0, 229, 255, 0.1);
   }
 
-  a.btn-outline-info:hover {
-    background-color: #00aaff !important;
-    border-color: #00aaff !important;
-    color: #fff !important;
+  .btn-primary, .btn-outline-primary {
+    border-radius: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.25s ease;
+  }
+
+  .btn-outline-primary {
+    border-color: #00e5ff;
+    color: #00e5ff;
+  }
+
+  .btn-outline-primary:hover {
+    background-color: #00e5ff;
+    color: #121212;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+  }
+
+  .btn-primary {
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    color: #121212;
+  }
+
+  .btn-primary:hover {
+    background-color: #0097a7;
+    border-color: #0097a7;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.6);
+  }
+
+  /* === Animation Effects === */
+  .animate-fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.2s ease forwards;
+  }
+
+  .fade-in-delay {
+    opacity: 0;
+    animation: fadeIn 2.2s ease forwards;
+    animation-delay: 1s;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* === Button hover floating motion === */
+  .btn-animate:hover {
+    transform: translateY(-3px);
   }
 </style>
+
+<!-- Optional icons (Bootstrap Icons) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 {% endblock %}

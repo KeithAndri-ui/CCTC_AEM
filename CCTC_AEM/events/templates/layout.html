@@ -11,137 +11,184 @@
 
   <!-- Dark Elegant + Glassmorphism Style -->
   <style>
-    /* === Elegant Dark Glass Theme === */
-    body {
-      background: radial-gradient(circle at top left, #0d0d0d, #121212, #1a1a1a);
-      color: #e0e0e0;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding-top: 70px; /* Space for fixed navbar */
-      font-family: "Poppins", sans-serif;
-    }
+  /* === Elegant Dark Glass Theme === */
+  /* === Elegant Dark Glass Theme with Background Image === */
+body {
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.85)),
+    url("{% static 'images/bg.jpg' %}") no-repeat center center fixed;
+  background-size: cover;
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px;
+  font-family: "Poppins", sans-serif;
+}
 
-    /* Fixed Glass Navbar */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1030;
-      backdrop-filter: blur(12px);
-      background: rgba(30, 30, 30, 0.75);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
-    }
 
-    .navbar-brand, .nav-link {
-      color: #e0e0e0 !important;
-      transition: color 0.2s ease, text-shadow 0.2s ease;
-    }
+  /* Fixed Glass Navbar with Glow */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+    backdrop-filter: blur(12px);
+    background: rgba(4, 23, 31, 0.658);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 0 10px rgba(0, 229, 255, 0.2),
+      0 0 20px rgba(0, 229, 255, 0.1),
+      0 2px 12px rgba(0, 0, 0, 0.6);
+    transition: box-shadow 0.4s ease;
+  }
 
-    .nav-link:hover {
-      color: #00e5ff !important;
-      text-shadow: 0 0 6px #00e5ff;
-    }
+  .navbar:hover {
+    box-shadow:
+      0 0 12px rgba(0, 229, 255, 0.4),
+      0 0 25px rgba(0, 229, 255, 0.2),
+      0 2px 14px rgba(0, 0, 0, 0.6);
+  }
 
-    main.container {
-      flex: 1;
-      padding-bottom: 100px;
-    }
+  /* Navbar text glow */
+  .navbar-brand, .nav-link {
+    color: #e0e0e0 !important;
+    transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.2s ease;
+    text-shadow: 0 0 6px rgba(0, 229, 255, 0.35);
+  }
 
-    /* === Glassmorphism Card === */
-    .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-      color: #e0e0e0;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
+  .navbar-brand:hover, .nav-link:hover {
+    color: #00e5ff !important;
+    text-shadow:
+      0 0 6px #00e5ff,
+      0 0 12px #00e5ff,
+      0 0 24px rgba(0, 229, 255, 0.9);
+    transform: scale(1.05);
+  }
 
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
-    }
+  .nav-link.active {
+    color: #00e5ff !important;
+    text-shadow:
+      0 0 8px #00e5ff,
+      0 0 16px rgba(0, 229, 255, 0.6);
+  }
 
-    .card-footer {
-      background: rgba(255, 255, 255, 0.08);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
+  main.container {
+    flex: 1;
+    padding-bottom: 100px;
+  }
 
-    /* Buttons */
-    .btn-primary {
-      background-color: #00bcd4;
-      border-color: #00bcd4;
-      color: #121212;
-      font-weight: 500;
-      border-radius: 12px;
-      transition: all 0.2s ease;
-    }
-    .btn-primary:hover {
-      background-color: #0097a7;
-      border-color: #0097a7;
-      transform: scale(1.03);
-    }
+  /* === Glassmorphism Card === */
+  .card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    color: #e0e0e0;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
 
-    .btn-outline-primary {
-      border-color: #00bcd4;
-      color: #00bcd4;
-      border-radius: 12px;
-    }
-    .btn-outline-primary:hover {
-      background-color: #00bcd4;
-      color: #121212;
-    }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+  }
 
-    /* Scrollbar Customization */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background-color: #00bcd4;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background-color: #1a1a1a;
-    }
+  .card-footer {
+    background: rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
 
-    /* Footer with Fade-in */
-    footer {
-      background: rgba(30, 30, 30, 0.9);
-      color: #9e9e9e;
-      text-align: center;
-      padding: 1rem 0;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
+  /* Buttons */
+  .btn-primary {
+    background-color: #00bcd4;
+    border-color: #00bcd4;
+    color: #121212;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    background-color: #0097a7;
+    border-color: #0097a7;
+    transform: scale(1.03);
+  }
 
-    footer.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .btn-outline-primary {
+    border-color: #00bcd4;
+    color: #00bcd4;
+    border-radius: 12px;
+  }
+  .btn-outline-primary:hover {
+    background-color: #00bcd4;
+    color: #121212;
+  }
 
-    /* Text Highlights */
-    .text-white { color: #ffffff8a !important; }
-    .text-cyan { color: #00e5ff !important; }
-    .text-violet { color: #b388ff !important; }
-    .text-emerald { color: #69f0ae !important; }
-    .text-gold { color: #ffeb3b !important; }
-  </style>
+  /* Scrollbar Customization */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #00bcd4;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: #1a1a1a;
+  }
+
+  /* Footer */
+  footer {
+    background: rgba(4, 23, 31, 0.658);
+    color: #9e9e9e;
+    text-align: center;
+    padding: 1rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  footer.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Text Highlights */
+  .text-white { color: #ffffff8a !important; }
+  .text-cyan { color: #00e5ff !important; }
+  .text-violet { color: #b388ff !important; }
+  .text-emerald { color: #69f0ae !important; }
+  .text-gold { color: #ffeb3b !important; }
+
+  /* Logo inside navbar */
+  .navbar-brand img {
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .navbar-brand img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 18px rgba(0, 229, 255, 0.8);
+  }
+</style>
+
 </head>
 
 <body>
   <!-- Frosted Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container">
-      <a class="navbar-brand fw-bold text-cyan" href="{% url 'event_list' %}">CCTC AEM</a>
+      <a class="navbar-brand d-flex align-items-center fw-bold" href="{% url 'event_list' %}">
+        <img src="{% static 'images/logo.png' %}" alt="CCTC Logo" />
+        <span class="text-cyan">CCTC AEM</span>
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
