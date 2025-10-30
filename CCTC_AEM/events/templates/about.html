@@ -1,0 +1,122 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %}About | CCTC AEM{% endblock %}
+{% block content %}
+
+<div class="container py-5 text-center">
+  <div class="card mx-auto p-5 mt-5 shadow-lg border-0" style="max-width: 1100px;">
+    <h1 class="fw-bold text-cyan mb-3">About CCTC Academic Event Management</h1>
+    <p class="lead text-white-50 mb-4">
+      Empowering education through technology and collaboration.
+    </p>
+
+    <hr class="text-secondary mb-4">
+
+    <div class="text-start px-3">
+      <h3 class="text-info mb-3">About CCTC</h3>
+      <p class="text-light">
+        <strong>Consolatrix College of Toledo City Inc. (CCTC)</strong> is a private, Catholic educational institution in Toledo City, Cebu, founded and managed by the Augustinian Recollect Sisters.
+        Established in 1961 as Consolatrix Academy, it was initially a response to the community's need for a Catholic high school. 
+        Over time, it expanded its offerings to include various undergraduate degree programs, leading to its evolution into a college.
+        CCTC is officially recognized by both the Department of Education (DepEd) and the Commission on Higher Education (CHED),
+        ensuring its full compliance with national educational standards. Its commitment to quality is further demonstrated by 
+        the Basic Education program's Level III accreditation from the Philippine Accrediting Association of Schools, Colleges and 
+        Universities (PAASCU), a testament to its strong academic foundation and modern educational practices.
+      </p>
+
+      <h3 class="text-info mt-4 mb-3">Purpose of AEM</h3>
+      <p class="text-light">
+        The <strong>Academic Event Management (AEM)</strong> system was designed to make it easier for both
+        students and faculty to organize, monitor, and participate in events such as seminars, workshops, and
+        conferences. It ensures a smoother process for managing schedules, registrations, and updates —
+        enhancing academic engagement and collaboration.
+      </p>
+
+      <h3 class="text-info mt-4 mb-3">Our Team</h3>
+
+      <div class="row justify-content-center g-4 text-center">
+        <!-- Member 1 -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card bg-dark bg-opacity-50 border-0 p-3 h-100">
+            <img src="{% static 'images/team6.png' %}" alt="Keith Andri Mag-aso" class="rounded-circle mx-auto mb-3" style="height: 100px; width: 100px; object-fit: cover;">
+            <h5 class="text-cyan">Keith Andri Mag-aso</h5>
+            <p class="text-white-50 mb-0">Lead Developer & Designer</p>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card bg-dark bg-opacity-50 border-0 p-3 h-100">
+            <img src="{% static 'images/team7.png' %}" alt="Clint Wilson Gonzales" class="rounded-circle mx-auto mb-3" style="height: 100px; width: 100px; object-fit: cover;">
+            <h5 class="text-cyan">Clint Wilson Gonzales</h5>
+            <p class="text-white-50 mb-0">Backend Developer</p>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card bg-dark bg-opacity-50 border-0 p-3 h-100">
+            <img src="{% static 'images/team3.png' %}" alt="Bless Abegail Antemaro" class="rounded-circle mx-auto mb-3" style="height: 100px; width: 100px; object-fit: cover;">
+            <h5 class="text-cyan">Bless Abegail Antemaro</h5>
+            <p class="text-white-50 mb-0">Frontend Developer</p>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card bg-dark bg-opacity-50 border-0 p-3 h-100">
+            <img src="{% static 'images/team4.png' %}" alt="Stephanie Encabo" class="rounded-circle mx-auto mb-3" style="height: 100px; width: 100px; object-fit: cover;">
+            <h5 class="text-cyan">Stephanie Encabo</h5>
+            <p class="text-white-50 mb-0">Project Coordinator</p>
+          </div>
+        </div>
+
+        <!-- Member 5 -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card bg-dark bg-opacity-50 border-0 p-3 h-100">
+            <img src="{% static 'images/team5.png' %}" alt="Archie Rubin" class="rounded-circle mx-auto mb-3" style="height: 100px; width: 100px; object-fit: cover;">
+            <h5 class="text-cyan">Archie Rubin</h5>
+            <p class="text-white-50 mb-0">Documentation & QA Specialist</p>
+          </div>
+        </div>
+
+        <!-- Member 6 -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+          <div class="card bg-dark bg-opacity-50 border-0 p-3 h-100">
+            <img src="{% static 'images/team8.png' %}" alt="John Kinon C. Lapis" class="rounded-circle mx-auto mb-3" style="height: 100px; width: 100px; object-fit: cover;">
+            <h5 class="text-cyan">John Kinon C. Lapis</h5>
+            <p class="text-white-50 mb-0">System Analyst</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <a href="{% url 'event_list' %}" class="btn btn-outline-primary me-2">🏠 Back to Dashboard</a>
+      <a href="{% url 'get_started' %}" class="btn btn-primary">🚀 Get Started</a>
+    </div>
+  </div>
+</div>
+
+<style>
+body {
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
+    url("{% static 'images/bg_about.jpg' %}") no-repeat center center fixed;
+  background-size: cover;
+}
+.card {
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: #e0e0e0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+</style>
+
+{% endblock %}

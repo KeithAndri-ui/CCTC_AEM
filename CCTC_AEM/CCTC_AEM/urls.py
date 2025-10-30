@@ -12,6 +12,8 @@ urlpatterns = [
     path('login/', event_views.login_view, name='login'),
     path('signup/', event_views.signup_view, name='signup'),
     path('logout/', event_views.logout_view, name='logout'),
+    path('about/', event_views.about_view, name='about'),
+
 
     # Events management
     path('events/', include('events.urls')),  # this points to your events app

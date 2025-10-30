@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Event
 from .forms import EventForm
+from datetime import date
 
 
 # ---------- AUTH VIEWS ----------
@@ -63,9 +64,11 @@ def event_list(request):
 
     events = Event.objects.all()
 
+    # Filtering by query
     if query:
         events = events.filter(title__icontains=query) | events.filter(description__icontains=query)
 
+    # Filtering by date
     if date_filter:
         events = events.filter(date=date_filter)
 
@@ -81,13 +84,23 @@ def event_list(request):
     else:
         events = events.order_by('date')  # default sort
 
-    return render(request, 'events/event_list.html', {
+    # --------- Dashboard Analytics ---------
+    today = date.today()
+    total_events = Event.objects.count()
+    upcoming_events = Event.objects.filter(date__gte=today).count()
+    past_events = Event.objects.filter(date__lt=today).count()
+
+    context = {
         'events': events,
         'query': query,
         'date_filter': date_filter,
         'sort': sort,
-    })
+        'total_events': total_events,
+        'upcoming_events': upcoming_events,
+        'past_events': past_events,
+    }
 
+    return render(request, 'events/event_list.html', context)
 
 
 @login_required
@@ -125,3 +138,6 @@ def delete_event(request, pk):
         messages.success(request, "Event deleted successfully!")
         return redirect('event_list')
     return render(request, 'events/event_confirm_delete.html', {'event': event})
+
+def about_view(request):
+    return render(request, 'about.html')

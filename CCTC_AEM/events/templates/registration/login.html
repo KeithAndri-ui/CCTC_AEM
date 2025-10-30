@@ -18,16 +18,85 @@
         <label class="form-label text-light">Username</label>
         <input type="text" name="username" class="form-control bg-dark text-light border-secondary" required>
       </div>
-      <div class="mb-3 text-start">
+      <div class="mb-3 text-start position-relative">
         <label class="form-label text-light">Password</label>
-        <input type="password" name="password" class="form-control bg-dark text-light border-secondary" required>
+        <input type="password" id="loginPassword" name="password" class="form-control bg-dark text-light border-secondary pe-5" required>
+        <i class="bi bi-eye-slash-fill toggle-password" data-target="loginPassword"></i>
       </div>
       <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
+
+    <hr class="text-secondary">
+
+    <!-- Social Login Buttons -->
+    <div class="social-login mt-3">
+      <p class="text-light mb-3">Or sign in with</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#" class="social-btn google"><i class="bi bi-google"></i></a>
+        <a href="#" class="social-btn facebook"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="social-btn twitter"><i class="bi bi-twitter"></i></a>
+      </div>
+    </div>
 
     <hr class="text-secondary">
     <p class="mt-2 text-secondary">Don’t have an account?</p>
     <a href="{% url 'signup' %}" class="btn btn-outline-primary w-100">Create Account</a>
   </div>
 </div>
+
+<style>
+.toggle-password {
+  position: absolute;
+  right: 15px;
+  top: 55%;
+  cursor: pointer;
+  color: #377dbe;
+  transition: color 0.3s;
+}
+.toggle-password:hover {
+  color: #0dcaf0;
+}
+
+/* Circular Social Icons */
+.social-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.2);
+  text-decoration: none;
+}
+
+.social-btn:hover {
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.5);
+}
+
+/* Individual platform colors */
+.google:hover { color: #37a5ad; }
+.facebook:hover { color: #1877f2; }
+.twitter:hover { color: #1da1f2; }
+</style>
+
+<script>
+document.querySelectorAll('.toggle-password').forEach(icon => {
+  icon.addEventListener('click', () => {
+    const target = document.getElementById(icon.dataset.target);
+    if (target.type === 'password') {
+      target.type = 'text';
+      icon.classList.remove('bi-eye-slash-fill');
+      icon.classList.add('bi-eye-fill');
+    } else {
+      target.type = 'password';
+      icon.classList.remove('bi-eye-fill');
+      icon.classList.add('bi-eye-slash-fill');
+    }
+  });
+});
+</script>
 {% endblock %}
